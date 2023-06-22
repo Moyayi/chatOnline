@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodejs": "^0.0.0",
+    "socket.io": "^4.6.2"
+  },
+  "name": "chatonlineserver",
+  "version": "1.0.0",
+  "description": "Backend of a chat online with nodejs and express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./index.js"
+  },
+  "author": "Peter MG",
+  "license": "ISC"
+}
