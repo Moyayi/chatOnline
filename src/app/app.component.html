@@ -1,4 +1,16 @@
+    <h1>Sending username to the server</h1>
+
 <form [formGroup]="loginForm" (ngSubmit)="login()">
     <input type="text" formControlName="username">
+
+</form>
+
+<br>
+<hr>
+<br>
+
+<h1>Sending message to the server and getting it back from the server</h1>
+<form [formGroup]="chatForm" (ngSubmit)="message()">
+    <input type="text" formControlName="message">
 
 </form>

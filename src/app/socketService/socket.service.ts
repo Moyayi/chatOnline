@@ -7,8 +7,12 @@ import { map } from 'rxjs'
 export class SocketService {
 
   constructor(private socket : Socket) {
-    this.socket.on('welcomed', (msg : string) => {
+    this.socket.on('login', (msg : string) => {
       console.log(msg)
+    })
+
+    this.socket.on('message', (msg : string ) => { 
+      console.log(`Message from the server Channel  - ${msg}`)
     })
   }
 

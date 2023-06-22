@@ -14,6 +14,10 @@ export class AppComponent implements OnInit{
     username : new FormControl(''),
   })
 
+  chatForm = new FormGroup({
+    message : new FormControl('')
+  })
+
 
   constructor(
     private socket : SocketService
@@ -25,6 +29,11 @@ export class AppComponent implements OnInit{
 
   login(){
     this.socket.loginUsername(this.loginForm.controls['username'].value!)
+  }
+
+  message(){
+    if(this.chatForm.controls['message'].value?.trim() === "") return ;
+    this.socket.sendMessage(this.chatForm.controls['message'].value!)
   }
 }
 
