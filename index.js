@@ -10,7 +10,7 @@ const io = require('socket.io')(server,options)
 let users = []
 
 io.on('connection', (socket) => {
-    console.log(socket.id)
+    //TODO create a token in order to prevent disconnection from username and lose the data!
     users.push(socket.id)
     socket.on('disconnect', () => {
         console.log(`The user ${socket.id} has been disconnected`)
@@ -24,11 +24,14 @@ io.on('connection', (socket) => {
 
     socket.on('login', (arg) => {
         console.log(`The username ${arg} has been connected`)
-        io.to(socket.id).emit("welcomed", `Welcomed ${arg}`)
+        socket.username = arg
+        console.log(socket.username)
+        io.to(socket.id).emit("login", `Welcomed ${arg}`)
     })
 
     socket.on('message', (arg, callback) => {
         console.log(arg)
+        io.to(socket.id).emit('message', "We are listening u!")
     })
 })
 
