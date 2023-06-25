@@ -1,5 +1,7 @@
-const app = require('express')();
+const express = require('express')
+const app = express();
 const server = require('http').createServer(app);
+
 const PORT = 3000
 const options = { 
     cors: {
@@ -8,6 +10,14 @@ const options = {
 };
 const io = require('socket.io')(server,options)
 let users = []
+
+
+app.get('/checkStatus', (req, res) => { 
+    res.json({
+        status : true
+    })
+})
+
 
 io.on('connection', (socket) => {
     //TODO create a token in order to prevent disconnection from username and lose the data!
