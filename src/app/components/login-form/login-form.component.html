@@ -1,0 +1,13 @@
+<div class="loginBox">
+    <form [formGroup]="loginForm">
+        <label>
+            Username to start the chat!
+        </label>
+        <br><br>
+        <input type="text" formControlName="username">
+        <br><br>
+        <button (click)="login()">
+            Log in!
+        </button>
+    </form>
+</div>

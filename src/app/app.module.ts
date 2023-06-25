@@ -8,6 +8,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http'
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoadChatsComponent } from './components/load-chats/load-chats.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ChatsComponent } from './pages/chats/chats.component';
 
 const config : SocketIoConfig = { 
   url : 'http://localhost:3000', 
@@ -18,7 +21,10 @@ const config : SocketIoConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoadChatsComponent,
+    LoginFormComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,
