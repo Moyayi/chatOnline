@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { map } from 'rxjs'
 @Injectable({
@@ -6,13 +7,20 @@ import { map } from 'rxjs'
 })
 export class SocketService {
 
-  constructor(private socket : Socket) {
+  constructor(private socket : Socket, private router : Router) {
+
+    console.log(this.socket)
     this.socket.on('login', (msg : string) => {
       console.log(msg)
     })
 
     this.socket.on('message', (msg : string ) => { 
       console.log(`Message from the server Channel  - ${msg}`)
+    })
+
+
+    this.socket.on('connect_error', () => {
+      //TODO i have to think about it
     })
   }
 
@@ -29,5 +37,9 @@ export class SocketService {
     .pipe(
       map((data) => console.log(data))
     )
+  }
+
+  disconnect() : void { 
+    this.socket.disconnect();
   }
 }

@@ -13,18 +13,7 @@ export class AppComponent{
   title = 'chatOnlineAngular';
 
 
-  chatForm = new FormGroup({
-    message : new FormControl('')
-  })
 
-
-  constructor(
-    private socket : SocketService,
-  ){}
-  message(){
-    if(this.chatForm.controls['message'].value?.trim() === "") return ;
-    this.socket.sendMessage(this.chatForm.controls['message'].value!)
-  }
 }
 
 
