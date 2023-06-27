@@ -1,13 +1,28 @@
 <div class="loginBox">
-    <form [formGroup]="loginForm">
-        <label>
-            Username to start the chat!
-        </label>
-        <br><br>
-        <input type="text" formControlName="username">
-        <br><br>
-        <button (click)="login()">
-            Log in!
-        </button>
-    </form>
+    <div *ngIf="checkStatus; else prueba">
+        <mat-progress-spinner
+            class="example-margin"
+            color="accent"
+            mode="indeterminate"
+            value="50">
+        </mat-progress-spinner>
+    </div>
+    <ng-template #prueba>
+        <form [formGroup]="loginForm">
+            <label>
+                Username to start the chat!
+            </label>
+            <br><br>
+            <input type="text" formControlName="username">
+            <br><br>
+            <div class="text-center">
+                <button
+                    (click)="login()"
+                    mat-raised-button color="accent">
+                        <mat-icon>account_circle</mat-icon>
+                        Log in!
+                </button>
+            </div>
+        </form>
+    </ng-template>
 </div>
