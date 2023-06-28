@@ -8,17 +8,24 @@
         </mat-progress-spinner>
     </div>
     <ng-template #prueba>
-        <form [formGroup]="loginForm">
-            <label>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="formLogin">
+            <h2>
                 Username to start the chat!
-            </label>
-            <br><br>
-            <input type="text" formControlName="username">
-            <br><br>
+            </h2>
+            
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input 
+                    matInput 
+                    formControlName="username"
+                    color=""
+                    >
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            
             <div class="text-center">
                 <button
-                    (click)="login()"
-                    mat-raised-button color="accent">
+                    mat-raised-button>
                         <mat-icon>account_circle</mat-icon>
                         Log in!
                 </button>

@@ -32,8 +32,7 @@ export class LoginFormComponent implements OnInit, OnDestroy{
     //if server doesnt response, call ngDestroy and disconnect
     this._service.checkStatus().subscribe({
       next: (resp) => {
-        console.log("todo gucci")
-        this.testing();
+        this.loading();
       },
       error : ( ) => {
         this.ngOnDestroy()
@@ -52,10 +51,9 @@ export class LoginFormComponent implements OnInit, OnDestroy{
     this._route.navigate(['Chats'])
   }
   
-  async testing() { 
+  async loading() { 
     await this.delay()
     this.checkStatus = false;
-    console.log("delay")
   }
 
 }
