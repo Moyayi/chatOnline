@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { SocketService } from 'src/app/socketService/socket.service';
@@ -12,7 +12,7 @@ import { SocketService } from 'src/app/socketService/socket.service';
 export class LoginFormComponent implements OnInit, OnDestroy{
 
   loginForm = new FormGroup({
-    username : new FormControl(''),
+    username : new FormControl('', [ Validators.required, Validators.minLength(6)]),
   })
   
   delay : Function = (ms ? : number) : Promise<void> => { 
@@ -46,8 +46,17 @@ export class LoginFormComponent implements OnInit, OnDestroy{
   }
 
   login(){
+    //Check if loginForm has any error
+    if(this.loginForm.controls['username'].errors !== null){
+      // TODO display dialog with the error
+      return
+    }
+
     this.socket.loginUsername(this.loginForm.controls['username'].value!)
-    // TODO Guard and check if server is up, after that redirect to another component
+
+    //TODO TEMP remove after added guard 
+    localStorage.setItem('username', this.loginForm.controls['username'].value!)
+
     this._route.navigate(['Chats'])
   }
   

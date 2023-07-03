@@ -1,1 +1,22 @@
-<p>load-chats works!</p>
+<div class="row appBox">
+    <div class="col-md-4 chats">
+        <h1>Chats Disponibles</h1>
+        <div *ngFor="let item of chats" (click)="clickedRoom(item.room)">
+            <div class="d-flex justify-content-between chat">
+                <span>{{ item.room }}</span>
+                <span>{{ item.messages }}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8 conversation"
+        *ngIf="activedRoom !== '' ; else withoutRoom ">
+        Estas en la sala de chat <h2>{{activedRoom}}</h2>
+    </div>
+    <ng-template #withoutRoom>
+        <div class="col-md-8 conversation text-center my-auto">
+            <h1 class="">Entra en algún chat para empezar a hablar!</h1>
+        </div>  
+    </ng-template>
+    
+</div>

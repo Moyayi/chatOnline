@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
+LoginFormComponent
 import { ChatsComponent } from './pages/chats/chats.component';
 import { ErrorServerComponent } from './pages/error-server/error-server.component';
-
+import { authGuard } from './services/guards/auth.guard';
+import { LoginFormComponent } from './pages/login/login-form.component';
 const routes: Routes = [
   {
     path: '',
@@ -12,7 +13,8 @@ const routes: Routes = [
   },
   {
     path:'Chats',
-    component: ChatsComponent
+    component: ChatsComponent,
+    // canActivate: [authGuard]
   },
   {
     path: 'errorServer',
