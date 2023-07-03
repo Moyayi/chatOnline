@@ -1,22 +1,50 @@
 const express = require('express')
 const app = express();
-const server = require('http').createServer(app);
 
+const server = require('http').createServer(app);
+const cors = require('cors')
+
+const rooms = [
+    {
+        room : 'VideoJuegos',
+        messages : 0
+    },
+    {
+        room : 'Deportes',
+        messages : 0
+    },
+    {
+        room : 'Series',
+        messages : 0
+    },
+    {
+        room : 'Off-Topic',
+        messages : 0
+    },
+
+]
 const PORT = 3000
 const options = { 
     cors: {
         origin : '*'
     }
 };
+
+// app.use(cors)
+
 const io = require('socket.io')(server,options)
 let users = []
 
 
-app.get('/checkStatus', (req, res) => { 
-    res.json({
-        status : true
-    })
+app.get('/checkStatus',cors(), (req, res) => { 
+    res.send(true);
 })
+
+app.get('/roomsAviable', cors(), (req, res) => { 
+    res.send(rooms)
+})
+
+
 
 
 io.on('connection', (socket) => {
