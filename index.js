@@ -49,9 +49,15 @@ app.get('/roomsAviable', cors(), (req, res) => {
 
 io.on('connection', (socket) => {
     //TODO create a token in order to prevent disconnection from username and lose the data!
+    console.log(`Nuevo usuario contectado ${socket.id}`)
     users.push(socket.id)
+    
+    rooms.map(({room}) => {
+        socket.join(room)
+    })
+
     socket.on('disconnect', () => {
-        console.log(`The user ${socket.id} has been disconnected`)
+        console.log(`${socket.id} ha sido desconectado por recargar la pagina en este caso`)
 
         users.splice(
             users.indexOf(socket.id),
@@ -63,16 +69,37 @@ io.on('connection', (socket) => {
     socket.on('login', (arg) => {
         console.log(`The username ${arg} has been connected`)
         socket.username = arg
-        console.log(socket.username)
-        io.to(socket.id).emit("login", `Welcomed ${arg}`)
+    })
+    
+    socket.on('join room', (arg) => {
+        socket.join(arg)
+        console.log(`${socket.username} se ha unido a la sala ${arg}`)
     })
 
     socket.on('message', (arg, callback) => {
-        console.log(arg)
-        io.to(socket.id).emit('message', "We are listening u!")
+        arg = JSON.parse(arg)
+        console.log("Mensaje recibido desde el cliente")
+        switch(arg.room){
+            case rooms[0].room:
+                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                break;
+            
+            case rooms[1].room:
+                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                break;
+
+            case rooms[2].room:
+                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                break;
+
+            case rooms[3].room:
+                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                break;
+        }
+        
+        
     })
 })
-
 
 
 
