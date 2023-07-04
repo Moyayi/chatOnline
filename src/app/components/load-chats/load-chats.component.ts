@@ -28,6 +28,30 @@ export class LoadChatsComponent implements OnInit{
   clickedRoom( room : string ){
     //TODO set messages to 0 after clicked on the room
     
+    let currentRoom = document.getElementById(room)
+    let previousRoom = document.getElementById(this.activedRoom);
+
+    console.log(`Acitve room ${this.activedRoom}  - new room ${room}`)
+
+    if(this.activedRoom === ''){
+      console.log("entraaaa en cuando está vacio")
+      this.activedRoom = room
+      console.log(currentRoom)
+      currentRoom?.classList.remove('hidden')
+      currentRoom?.classList.add('active')
+
+    }else{
+      previousRoom?.classList.remove('active')
+      previousRoom?.classList.add('hidden')
+      
+      currentRoom?.classList.remove('hidden')
+      currentRoom?.classList.add('active')
+      
+      this.activedRoom = room
+    }
+
+
+
     this.activedRoom = room
   }
 

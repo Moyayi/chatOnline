@@ -22,7 +22,6 @@ export class LoginFormComponent implements OnInit, OnDestroy{
   checkStatus : boolean = true;
 
   constructor(
-    private socket : SocketService,
     private _route : Router,
     private _service : ApiCallService
   ){}
@@ -42,7 +41,7 @@ export class LoginFormComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.socket.disconnect();
+    
   }
 
   login(){
@@ -51,9 +50,6 @@ export class LoginFormComponent implements OnInit, OnDestroy{
       // TODO display dialog with the error
       return
     }
-
-    this.socket.loginUsername(this.loginForm.controls['username'].value!)
-
     //TODO TEMP remove after added guard 
     localStorage.setItem('username', this.loginForm.controls['username'].value!)
 

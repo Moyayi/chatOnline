@@ -4,3 +4,10 @@ export interface RoomsChats {
     room:     string;
     messages: number;
 }
+
+export interface messageChat {
+    room:     string;
+    message: string;
+    username : string;
+    usernameSocket ?: string;
+}

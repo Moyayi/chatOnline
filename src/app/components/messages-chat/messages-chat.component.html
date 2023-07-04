@@ -1,0 +1,7 @@
+<form [formGroup]="messageForm">
+    <input 
+        formControlName="message"
+        (keyup.enter)="sendMessage()" 
+        type="text" 
+    >
+</form>

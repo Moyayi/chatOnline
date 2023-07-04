@@ -9,14 +9,40 @@
         </div>
     </div>
     
-    <div class="col-md-8 conversation"
-        *ngIf="activedRoom !== '' ; else withoutRoom ">
-        Estas en la sala de chat <h2>{{activedRoom}}</h2>
-    </div>
-    <ng-template #withoutRoom>
-        <div class="col-md-8 conversation text-center my-auto">
-            <h1 class="">Entra en algún chat para empezar a hablar!</h1>
-        </div>  
-    </ng-template>
+    <!-- <div class=""
+        > -->
+
+        <div *ngFor="let items of chats" [id]="items.room" class="col-md-8 conversation hidden">
+            <div class="chatActivated">
+                <h2>{{items.room}}</h2>
+            </div>
+            <div class="dataConversation">
+                <div class="message">
+                    <h4>
+                        <u><b>
+                            Paco
+                            <!-- Add username {{}} -->
+                        </b></u>
+                    </h4>
+                    <p>
+                        Data of {{ items.room }}
+                    </p>
+                </div>
+                
+            </div>
+            <div>
+                <app-messages-chat [room]="items.room"></app-messages-chat>
+            </div>
+        </div>
+
+    <!-- </div> -->
+
+    <div class="col-md-8 conversation text-center my-auto mx-auto"
+        *ngIf="activedRoom === '' "
+    >
+        <h1 class="">Entra en algún chat para empezar a hablar!</h1>
+    </div>  
+
     
 </div>
+

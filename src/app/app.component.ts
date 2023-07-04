@@ -9,10 +9,13 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent{
+export class AppComponent implements OnInit{
   title = 'chatOnlineAngular';
 
 
+  ngOnInit(): void {
+    //TODO set token with timer
+  }
 
 }
 
