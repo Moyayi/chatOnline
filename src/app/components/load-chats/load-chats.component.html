@@ -17,21 +17,20 @@
                 <h2>{{items.room}}</h2>
             </div>
             <div class="dataConversation">
-                <div class="message">
+                <div class="message" *ngFor="let data of messageList">
                     <h4>
                         <u><b>
-                            Paco
-                            <!-- Add username {{}} -->
+                            
                         </b></u>
                     </h4>
                     <p>
-                        Data of {{ items.room }}
+                        {{ data }}
                     </p>
                 </div>
                 
             </div>
             <div>
-                <app-messages-chat [room]="items.room"></app-messages-chat>
+                <app-messages-chat [room]="items.room" [socket]="socket"></app-messages-chat>
             </div>
         </div>
 
@@ -45,4 +44,10 @@
 
     
 </div>
+
+<!-- <div class="testing">
+    <li *ngFor="let data of testing">
+        {{data}}
+    </li>
+</div> -->
 

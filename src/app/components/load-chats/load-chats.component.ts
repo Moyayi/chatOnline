@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 import { RoomsChats } from 'src/app/interfaces/roomsChats.interface';
 import { ApiCallService } from 'src/app/services/api-call.service';
+import { SocketService } from 'src/app/socketService/socket.service';
 
 
 @Component({
@@ -10,8 +12,12 @@ import { ApiCallService } from 'src/app/services/api-call.service';
 })
 export class LoadChatsComponent implements OnInit{
   
+  @Input() socket! : SocketService;
+
+
   activedRoom : string = ''
   chats : RoomsChats [] = []
+  messageList : string[] = []
   constructor(
     private _apiService : ApiCallService
   )
@@ -21,6 +27,10 @@ export class LoadChatsComponent implements OnInit{
     this._apiService.roomsAviable().subscribe(res => { 
       this.chats  = res
       console.log(this.chats)
+    })
+
+    this.socket.getMessage().subscribe((messsage : string ) => {
+      this.messageList.push(messsage)
     })
   }
 

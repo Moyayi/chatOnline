@@ -13,18 +13,20 @@ import { SocketService } from 'src/app/socketService/socket.service';
 export class MessagesChatComponent{
 
   @Input() room! : string;
-
+  @Input() socket! : SocketService;
+  
   messageForm = new FormGroup({
     message : new FormControl('', [ Validators.required, Validators.minLength(6)]),
   })
-
+  contador : number = 0
   messageToSend : messageChat = {
     room : '',
     message : '',
-    username : localStorage.getItem('username')?.toString()!
+    username : localStorage.getItem('username')?.toString()!,
+    valueNumber : this.contador
   }
 
-  constructor(private socketService : SocketService){
+  constructor(){
     
   }
 
@@ -34,8 +36,9 @@ export class MessagesChatComponent{
     this.messageToSend.message = this.messageForm.controls['message'].value!
     this.messageToSend.room = this.room
     
-    this.socketService.sendMessage(this.messageToSend)
+    this.socket.sendMessage(this.messageToSend)
 
     this.messageForm.controls['message'].reset();
+    this.contador++;
   }
 }

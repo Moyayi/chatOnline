@@ -9,9 +9,12 @@ import { SocketService } from 'src/app/socketService/socket.service';
 export class ChatsComponent implements OnInit{
 
 //TODO TEMP remove after added guard with ngOnInit
+
+  messageList : string[] = []
+
   constructor(
     private _router : Router,
-    private socket : SocketService
+    public socket : SocketService
   ){
 
   }
@@ -23,6 +26,5 @@ export class ChatsComponent implements OnInit{
     }
 
     this.socket.loginUsername(localStorage.getItem('username')?.toString()!)
-
   }
 }

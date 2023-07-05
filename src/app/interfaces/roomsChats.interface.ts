@@ -10,4 +10,5 @@ export interface messageChat {
     message: string;
     username : string;
     usernameSocket ?: string;
+    valueNumber ?: number
 }
