@@ -81,19 +81,19 @@ io.on('connection', (socket) => {
         console.log("Mensaje recibido desde el cliente")
         switch(arg.room){
             case rooms[0].room:
-                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                io.emit(`message`, JSON.stringify(arg))
                 break;
             
             case rooms[1].room:
-                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                io.to(arg.room).emit(`${arg.room}`, `Mensaje desde - ${arg.room}`)
                 break;
 
             case rooms[2].room:
-                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                io.to(arg.room).emit(`${arg.room}`, `Mensaje desde - ${arg.room}`)
                 break;
 
             case rooms[3].room:
-                io.to(arg.room).emit(`Hola mundo desde la sala ${arg.room}`)
+                io.to(arg.room).emit(`${arg.room}`, `Mensaje desde - ${arg.room}`)
                 break;
         }
         
