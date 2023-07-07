@@ -2,10 +2,16 @@
     <div class="col-md-4 chats">
         <h1>Chats Disponibles</h1>
         <div *ngFor="let item of chats" (click)="clickedRoom(item.room)">
-            <div class="d-flex justify-content-between chat">
+            <div *ngIf="item.room === 'VideoJuegos'">
+                <div class="d-flex justify-content-between chat">
+                    <span>{{ item.room }}</span>
+                    <span>{{ item.messages }}</span>
+                </div>
+            </div>
+            <!-- <div class="d-flex justify-content-between chat">
                 <span>{{ item.room }}</span>
                 <span>{{ item.messages }}</span>
-            </div>
+            </div> -->
         </div>
     </div>
     
@@ -17,15 +23,32 @@
                 <h2>{{items.room}}</h2>
             </div>
             <div class="dataConversation">
-                <div class="message" *ngFor="let data of messageList">
-                    <h4>
-                        <u><b>
-                            
-                        </b></u>
-                    </h4>
-                    <p>
-                        {{ data }}
-                    </p>
+                <div *ngFor="let data of messageFromChat">
+                    <div class="mine"
+                        *ngIf="data.usernameSocket === socket.getSocketUsername(); else notMyMessage">
+                        <div class="testingDos">
+                            <h4>
+                                <u><b>
+                                {{ data.username }} 
+                                </b></u>
+                            </h4>
+                            <p>
+                                {{ data.message }}
+                            </p>
+                        </div>
+                    </div>
+                    <ng-template #notMyMessage >
+                        <div class="message">
+                            <h4>
+                                <u><b>
+                                {{ data.username }} 
+                                </b></u>
+                            </h4>
+                            <p>
+                                {{ data.message }}
+                            </p>
+                        </div>
+                    </ng-template>
                 </div>
                 
             </div>

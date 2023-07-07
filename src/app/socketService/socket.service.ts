@@ -10,7 +10,18 @@ import { ApiCallService } from '../services/api-call.service';
 export class SocketService {
 
   rooms : RoomsChats [] = []
-  public message$: BehaviorSubject<string> = new BehaviorSubject('')
+  public message$: BehaviorSubject<messageChat> = new BehaviorSubject({
+    username: '',
+    room : '',
+    message : ''
+  })
+  
+  messageFromChat : messageChat = {
+    room:     "",
+    message: "",
+    username : ""
+  }
+  
   constructor(
     private socket : Socket, 
   ) {
@@ -45,11 +56,27 @@ export class SocketService {
     this.socket.emit('login', msg )
   }
 
+  getSocketUsername() : string {
+    return this.socket.ioSocket.id
+  }
+
+
   // getMessage(){
-  //   return this.socket.fromEvent('welcomed')
+  //   return this.socket.fromEvent('message')
   //   .pipe(
-  //     map((data) => console.log(data))
+  //     map((data) => {console.log(data)})
   //   )
+  // }
+
+  // getMessage() : messageChat{
+  //   debugger
+  //   this.socket.on('message', (message : string ) => {
+  //     this.messageFromChat = JSON.parse(message);
+  //     return this.messageFromChat
+  //   })
+
+  //   return this.messageFromChat
+    
   // }
 
   getMessage(){

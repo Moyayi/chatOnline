@@ -9,7 +9,7 @@ import { SocketService } from 'src/app/socketService/socket.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit, OnDestroy{
+export class LoginFormComponent implements OnInit{
 
   loginForm = new FormGroup({
     username : new FormControl('', [ Validators.required, Validators.minLength(6)]),
@@ -34,15 +34,15 @@ export class LoginFormComponent implements OnInit, OnDestroy{
         this.loading();
       },
       error : ( ) => {
-        this.ngOnDestroy()
+        
         this._route.navigate(['/errorServer'])
       }
     })
+
+    localStorage.clear();
   }
 
-  ngOnDestroy(): void {
-    
-  }
+ 
 
   login(){
     //Check if loginForm has any error

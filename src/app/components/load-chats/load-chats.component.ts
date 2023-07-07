@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { RoomsChats } from 'src/app/interfaces/roomsChats.interface';
+import { RoomsChats, messageChat } from 'src/app/interfaces/roomsChats.interface';
 import { ApiCallService } from 'src/app/services/api-call.service';
 import { SocketService } from 'src/app/socketService/socket.service';
 
@@ -10,14 +10,16 @@ import { SocketService } from 'src/app/socketService/socket.service';
   templateUrl: './load-chats.component.html',
   styleUrls: ['./load-chats.component.scss']
 })
-export class LoadChatsComponent implements OnInit{
+export class LoadChatsComponent implements OnInit, AfterViewInit{
   
   @Input() socket! : SocketService;
 
 
   activedRoom : string = ''
   chats : RoomsChats [] = []
-  messageList : string[] = []
+
+  messageFromChat : messageChat[] = []
+
   constructor(
     private _apiService : ApiCallService
   )
@@ -26,14 +28,22 @@ export class LoadChatsComponent implements OnInit{
   ngOnInit(): void {
     this._apiService.roomsAviable().subscribe(res => { 
       this.chats  = res
-      console.log(this.chats)
-    })
-
-    this.socket.getMessage().subscribe((messsage : string ) => {
-      this.messageList.push(messsage)
     })
   }
 
+  ngAfterViewInit(): void {
+    
+
+    this.socket.getMessage().subscribe((message : messageChat ) => {
+      // let testing = JSON.parse(message)
+      // console.log(typeof(testing), testing)
+      console.log('acaba de entrar en ngOnInit')
+      if(message.username === '') {
+        return
+      }
+      this.messageFromChat.push(message)
+    })
+  }
 
   clickedRoom( room : string ){
     //TODO set messages to 0 after clicked on the room

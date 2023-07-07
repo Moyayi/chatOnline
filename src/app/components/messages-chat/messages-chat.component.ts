@@ -23,7 +23,7 @@ export class MessagesChatComponent{
     room : '',
     message : '',
     username : localStorage.getItem('username')?.toString()!,
-    valueNumber : this.contador
+    usernameSocket : ''
   }
 
   constructor(){
@@ -35,7 +35,7 @@ export class MessagesChatComponent{
   sendMessage(){
     this.messageToSend.message = this.messageForm.controls['message'].value!
     this.messageToSend.room = this.room
-    
+    this.messageToSend.usernameSocket = this.socket.getSocketUsername();
     this.socket.sendMessage(this.messageToSend)
 
     this.messageForm.controls['message'].reset();
